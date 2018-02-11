@@ -42,10 +42,7 @@ public class EnvironmentSmeltery extends AbstractManagedEnvironment {
 	}
 
 	@Callback(doc = "function():int - Gets the amount of fuel in the smeltery")
-	public Object[] getFuelLevel(final Context context, Arguments arguments)
-	{
-		return new Object[] {smeltery.getFuel()};
-	}
+	public Object[] getFuelLevel(final Context context, Arguments arguments) { return new Object[] {smeltery.getFuelDisplay().fluid.amount}; }
 
 	@Callback(doc = "function([index:int]):int - Gets the smeltery temperature or the temperature of an item being smelted")
 	public Object[] getTemperature(final Context context, Arguments arguments)

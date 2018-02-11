@@ -17,14 +17,13 @@ public class DriverSmeltery implements DriverBlock{
 
 		TileEntity tile = world.getTileEntity(blockPos);
 
-		TinkersOCMod.getLogger().info("DriverSmeltery - Position: " + blockPos.toString() + " - Tile: " + ((tile == null) ? "NULL" : tile.getClass().toString()));
-
 		return tile != null && tile instanceof TileSmeltery;
 
 	}
 
 	@Override
 	public ManagedEnvironment createEnvironment(World world, BlockPos blockPos, EnumFacing enumFacing) {
+
 		TileSmeltery tile = (TileSmeltery)world.getTileEntity(blockPos);
 
 		return new EnvironmentSmeltery(tile);

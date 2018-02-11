@@ -22,11 +22,6 @@ public class EnvironmentTinkerFurnace extends AbstractManagedEnvironment {
 
 	}
 
-	private void testing()
-	{
-
-	}
-
 	@Callback(doc = "function():table - Get information on the furnace's current fuel")
 	public Object[] getFuelInfo(final Context context, Arguments arguments)
 	{
@@ -45,7 +40,7 @@ public class EnvironmentTinkerFurnace extends AbstractManagedEnvironment {
 	@Callback(doc = "function():int - Gets the amount of fuel in the furnace")
 	public Object[] getFuelLevel(final Context context, Arguments arguments)
 	{
-		return new Object[] {furnace.getFuel()};
+		return new Object[] {furnace.getFuelDisplay().fluid.amount};
 	}
 
 
