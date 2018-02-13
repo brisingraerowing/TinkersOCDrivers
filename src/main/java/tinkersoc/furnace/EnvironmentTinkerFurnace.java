@@ -1,7 +1,9 @@
 package tinkersoc.furnace;
 
+import li.cil.oc.api.API;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
+import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmeltery;
 import slimeknights.tconstruct.smeltery.tileentity.TileSearedFurnace;
 import li.cil.oc.api.Network;
@@ -74,6 +76,31 @@ public class EnvironmentTinkerFurnace extends AbstractManagedEnvironment {
 	public Object[] hasFuel(final Context context, Arguments arguments)
 	{
 		return new Object[] {furnace.hasFuel()};
+	}
+
+	@Callback(doc = "function(index:int):table - Gets the stack in the specified slot")
+	public Object[] getStackInSlot(final Context context, Arguments arguments)
+	{
+
+		if (!API.config.getBoolean("misc.allowItemStackInspection")) { return new Object[] {null, "ItemStack inspection disabled in OC config"}; }
+
+		int slot = arguments.checkInteger(0);
+		if (slot < 1 || slot > furnace.getSizeInventory()) { return new Object[] {null, "Invalid slot"}; }
+
+		slot--;
+
+		ItemStack stack = furnace.getItemHandler().getStackInSlot(slot);
+
+		if(stack.isEmpty()) { return new Object[] {null, "No item"}; }
+
+		return new Object[] {stack};
+
+	}
+
+	@Callback(doc = "function(index:int):number - Gets the heating progress of the item in the specified slot")
+	public Object[] getHeatingProgress(final Context context, Arguments arguments)
+	{
+		return new Object[] { furnace.getHeatingProgress(arguments.checkInteger(0)) };
 	}
 
 
