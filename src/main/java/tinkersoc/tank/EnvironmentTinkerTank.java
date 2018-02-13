@@ -40,4 +40,17 @@ public class EnvironmentTinkerTank extends AbstractManagedEnvironment {
 		return new Object[] { tank.getTank().getFluidAmount() };
 	}
 
+	@Callback(doc = "function(index:integer):boolean - Moves the fluid at the specified index to the bottom")
+	public Object[] moveFluidToBottom(final Context context, Arguments arguments)
+	{
+		int idx = arguments.checkInteger(0);
+
+		if (idx < 1 || idx > tank.getTank().getFluids().size()) return new Object[] {false, "Invalid index"};
+
+		tank.getTank().moveFluidToBottom(idx - 1);
+
+		return new Object[] {true};
+
+	}
+
 }
