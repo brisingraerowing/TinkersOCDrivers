@@ -4,6 +4,7 @@ import li.cil.oc.api.API;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmeltery;
 import slimeknights.tconstruct.smeltery.tileentity.TileSearedFurnace;
 import li.cil.oc.api.Network;
@@ -26,12 +27,12 @@ public class EnvironmentTinkerFurnace extends AbstractTinkersEnvironment<TileSea
 	@Callback(doc = "function():table - Get information on the furnace's current fuel")
 	public Object[] getFuelInfo(final Context context, Arguments arguments)
 	{
-		TileSmeltery.FuelInfo info = tile.getFuelDisplay();
+		FluidStack stack = tile.currentFuel;
 		return new Object[]{new HashMap<String, Object>() {
 			{
-				put("fluid", info.fluid);
-				put("heat", info.heat);
-				put("maxCap", info.maxCap);
+				put("fluid", stack);
+				put("heat", stack.getFluid().getTemperature());
+				put("maxCap", stack.amount);
 			}
 
 		}
@@ -41,7 +42,7 @@ public class EnvironmentTinkerFurnace extends AbstractTinkersEnvironment<TileSea
 	@Callback(doc = "function():int - Gets the amount of fuel in the furnace")
 	public Object[] getFuelLevel(final Context context, Arguments arguments)
 	{
-		return new Object[] {tile.getFuelDisplay().fluid.amount};
+		return new Object[] {tile.currentFuel.amount};
 	}
 
 

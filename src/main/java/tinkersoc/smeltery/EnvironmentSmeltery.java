@@ -1,8 +1,8 @@
 package tinkersoc.smeltery;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
+import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmeltery;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.network.Visibility;
@@ -29,12 +29,12 @@ public class EnvironmentSmeltery extends AbstractTinkersEnvironment<TileSmeltery
 	@Callback(doc = "function():table - Get information on the smeltery's current fuel")
 	public Object[] getFuelInfo(final Context context, Arguments arguments)
 	{
-		TileSmeltery.FuelInfo info = tile.getFuelDisplay();
+		FluidStack stack = tile.currentFuel;
 		return new Object[]{new HashMap<String, Object>() {
 			{
-				put("fluid", info.fluid);
-				put("heat", info.heat);
-				put("maxCap", info.maxCap);
+				put("fluid", stack);
+				put("heat", stack.getFluid().getTemperature());
+				put("maxCap", stack.amount);
 			}
 
 		}
@@ -42,7 +42,7 @@ public class EnvironmentSmeltery extends AbstractTinkersEnvironment<TileSmeltery
 	}
 
 	@Callback(doc = "function():int - Gets the amount of fuel in the smeltery")
-	public Object[] getFuelLevel(final Context context, Arguments arguments) { return new Object[] {tile.getFuelDisplay().fluid.amount}; }
+	public Object[] getFuelLevel(final Context context, Arguments arguments) { return new Object[] {tile.currentFuel.amount}; }
 
 	@Callback(doc = "function([index:int]):int - Gets the smeltery temperature or the temperature of an item being smelted")
 	public Object[] getTemperature(final Context context, Arguments arguments)

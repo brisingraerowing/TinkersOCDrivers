@@ -21,7 +21,7 @@ public class TinkersOCMod
 
 	public static final String MODID = "tinkersoc";
 	public static final String NAME = "Tinkers OpenComputers Driver";
-	public static final String VERSION = "0.1";
+	public static final String VERSION = "0.5";
 
 
 	private static Logger logger;
@@ -40,6 +40,5 @@ public class TinkersOCMod
 		Driver.add(new DriverSmeltery());
 		Driver.add(new DriverTinkerTank());
 		Driver.add(new DriverTinkerFurnace());
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }
