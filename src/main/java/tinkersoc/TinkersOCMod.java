@@ -15,7 +15,7 @@ import tinkersoc.tank.DriverTinkerTank;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraft.init.Items;
 
-@Mod(modid = TinkersOCMod.MODID, name = TinkersOCMod.NAME, version = TinkersOCMod.VERSION, dependencies = "after:opencomputers@[1.7.0,);after:tconstruct@[1.12.2-2.9.0,)")
+@Mod(modid = TinkersOCMod.MODID, name = TinkersOCMod.NAME, version = TinkersOCMod.VERSION, dependencies = "required-after:opencomputers@[1.7.0,);required-after:tconstruct@[1.12.2-2.9.0,)")
 public class TinkersOCMod
 {
 
